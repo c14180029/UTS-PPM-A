@@ -6,6 +6,48 @@
 	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
 	<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 	<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+	<script type="text/javascript">
+	var listCicilan = new Array();
+	function proses() {
+			var duit = $("#pinjaman").val();
+			var bulan = $("#bulan").val();
+			var bunga = 2.00;
+			var res = 0;
+			if (bulan <=6){
+				bunga = 2;
+			}
+			if(bulan >6 && bulan <=12){
+				bunga = 1.5;
+			}
+			if(bulan >12){
+				bunga = 1.00;
+			}
+			$("#initial_val").html(duit);
+			$("#initial_val_2").html(duit);
+			$("#bunga").html(bunga);
+			$("#bulan_pinjam").html(bulan);
+			result = duit * bunga * bulan;
+			$("#result").html(result);
+			if(result > 0){
+			var pinjaman = {
+			  duit: duit,
+			  bulan: bulan,
+			  bunga: bunga,
+			  result: result
+				};
+				listCicilan.push(pinjaman);
+				var cicil = "";
+				for (pinjam in listCicilan){
+					cicil = cicil + String(parseInt(pinjam)+1) + ". Rp" + listCicilan[pinjam]["duit"] + " kembali : Rp "+ listCicilan[pinjam]["result"]+ "<br>";
+				}
+				$("#list-cicilan").html(cicil)
+			}
+			
+
+		}
+		
+
+</script>
 </head>
 <body>
 	<div data-role="page" id="page_pinjam">
@@ -20,9 +62,15 @@
   		</div>
 	  	<div data-role="main" class="ui-content">
 	  		<label>Total Pinjaman(Rp)</label>
-	    	<input type="number" name="pinjaman" id="pinjaman"value="0">
+	    	<input type="number" step="0.01" name="pinjaman" id="pinjaman"value="0">
 	    	<label>Bulan</label>
-	    	<input type="number" name="bulan" id="bulan"value="0">
+	    	<input type="range" name="bulan" id="bulan"value="0" min=0 max=200>
+	    	<input type="button" name="btn_process" onclick="proses();" value="Proses Pinjaman">
+	    	<label>Total Pengembalian:</label>
+	    	<p>Rp<span id="initial_val">0</span>+(<span id="initial_val_2">0</span>*<span id="bunga">0</span>%*<span id="bulan_pinjam">0</span>)=<span id="result"></span></p>
+	    	<div id="list-cicilan">
+	    		
+	    	</div>
 	  	</div>
 
 		<div data-role="footer">
@@ -30,4 +78,5 @@
 	  	</div>
 	</div> 
 </body>
+
 </html>
