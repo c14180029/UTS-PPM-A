@@ -6,6 +6,16 @@
 	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
 	<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 	<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+	<style type="text/css">
+	#colorBox {
+	    width: 30em;
+	    height: 3em;
+	    background-color: #108040;
+	  }
+	  #colorBox {
+	    background-color: #7ACEF4;
+	  }
+	</style>
 	<script type="text/javascript">
 	var listCicilan = new Array();
 	function proses() {
@@ -49,6 +59,24 @@
 		$('input[type=radio][name=bln]').change(function() {
 			cek();
 		});
+	});
+	$(document).on("pageshow","#page_cicilan",function(){
+        alert("Welcome to Page Detail Cicilan...");
+    });
+    $(document).on("pageshow","#page_pinjam",function(){
+        alert("Welcome to Page Input Pinjam...");
+    });
+	$(function(){
+	  $( "#colorBox" ).bind( "tap", tapHandler );
+	  $( "#colorBox" ).bind( "taphold", tapholdHandler );
+	 
+	  function tapHandler( event ){
+	    $("div[data-role='page']").css( "background-color", "black");
+
+	  }
+		  function tapholdHandler( event ){
+	    $("div[data-role='page']").css( "background-color", "white");
+	  }
 	});
 	function cek() {
 		var cicil = "<ol data-role='listview'>";
@@ -108,6 +136,9 @@
 </script>
 </head>
 <body>
+	<div data-role="popup" id="notif">
+	  
+	</div>
 	<div data-role="page" id="page_pinjam">
   		<div data-role="header">
     		<h1>Input Pinjaman</h1>
@@ -153,6 +184,8 @@
 	    	<label><input type="radio" name="bln" value="7-12">7-12</label>
 	    	<label><input type="radio" name="bln" value=">12">>12</label>
 	    	<hr>
+	    	<input type="button" value="Rotae Layar" onclick="$( window ).orientationchange();">
+	    	<div id="colorBox">Tap Turn on dark mode | Hold to RESET</div>
 	    	<div id="detail-cicilan">
 	    		
 	    	</div>
