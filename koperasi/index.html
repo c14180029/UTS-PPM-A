@@ -45,6 +45,17 @@
 			
 
 		}
+	$(document).ready(function() {
+		$('input[type=radio][name=bln]').change(function() {
+			if(this.value == "0"){
+				var cicil = "";
+			    for (pinjam in listCicilan){
+					cicil = cicil + String(parseInt(pinjam)+1) + ". Rp" + listCicilan[pinjam]["duit"] + " kembali : Rp "+ listCicilan[pinjam]["result"]+ "<br>";
+				}
+			}
+			$("#detail-cicilan").html(cicil)
+		});
+	});
 		
 
 </script>
@@ -71,6 +82,34 @@
 	    	<div id="list-cicilan">
 	    		
 	    	</div>
+	  	</div>
+
+		<div data-role="footer">
+	    	<h1>Koperasi Online</h1>
+	  	</div>
+	</div> 
+	<div data-role="page" id="page_cicilan">
+  		<div data-role="header">
+    		<h1>Page Cicilan</h1>
+		    <div data-role="navbar">
+		      	<ul>
+			        <li><a href="#page_pinjam">Input Pinjaman</a></li>
+			        <li><a href="#page_cicilan">List Cicilan</a></li>
+		      	</ul>
+		    </div>
+  		</div>
+	  	<div data-role="main" class="ui-content">
+	    	<label>Filter Bulan</label>
+	    	<label>
+	    	<input type="radio" name="bln" value="0" checked="checked">All</label>
+	    	<label><input type="radio" name="bln" value="0-6">0-6</label>
+	    	<label><input type="radio" name="bln" value="7-12">7-12</label>
+	    	<label><input type="radio" name="bln" value=">12">>12</label>
+	    	<hr>
+	    	<div id="detail-cicilan">
+	    		
+	    	</div>
+	    	
 	  	</div>
 
 		<div data-role="footer">
