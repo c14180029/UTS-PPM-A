@@ -47,15 +47,62 @@
 		}
 	$(document).ready(function() {
 		$('input[type=radio][name=bln]').change(function() {
-			if(this.value == "0"){
-				var cicil = "";
-			    for (pinjam in listCicilan){
-					cicil = cicil + String(parseInt(pinjam)+1) + ". Rp" + listCicilan[pinjam]["duit"] + " kembali : Rp "+ listCicilan[pinjam]["result"]+ "<br>";
-				}
-			}
-			$("#detail-cicilan").html(cicil)
+			cek();
 		});
 	});
+	function cek() {
+		var cicil = "<ol data-role='listview'>";
+		
+			var cek = $("input:radio[name='bln']:checked").val();
+			
+		    for (pinjam in listCicilan){
+		    	
+		    	var buulan = parseInt(listCicilan[pinjam]["bulan"]);
+		    	if(cek == "0"){
+		    		cicil = cicil + "<li>";
+			    	cicil = cicil + "Pinjaman awal: " + listCicilan[pinjam]["duit"] + "<br>";
+			    	cicil = cicil + "Lama: " + listCicilan[pinjam]["bulan"] + "<br>";
+			    	cicil = cicil + "Bunga: " + listCicilan[pinjam]["bunga"] + "<br>";
+			    	cicil = cicil + "Total: " + listCicilan[pinjam]["result"];
+					cicil = cicil + "</li>";
+		    	}
+		    	else if(cek == "0-6"){
+		    		if (buulan > 0 && buulan <=6){
+		    			cicil = cicil + "<li>";
+				    	cicil = cicil + "Pinjaman awal: " + listCicilan[pinjam]["duit"] + "<br>";
+				    	cicil = cicil + "Lama: " + listCicilan[pinjam]["bulan"] + "<br>";
+				    	cicil = cicil + "Bunga: " + listCicilan[pinjam]["bunga"] + "<br>";
+				    	cicil = cicil + "Total: " + listCicilan[pinjam]["result"];
+						cicil = cicil + "</li>";
+		    		}
+		    	}
+		    	else if(cek == "7-12"){
+		    		if (buulan > 7 && buulan <=12){
+		    			cicil = cicil + "<li>";
+				    	cicil = cicil + "Pinjaman awal: " + listCicilan[pinjam]["duit"] + "<br>";
+				    	cicil = cicil + "Lama: " + listCicilan[pinjam]["bulan"] + "<br>";
+				    	cicil = cicil + "Bunga: " + listCicilan[pinjam]["bunga"] + "<br>";
+				    	cicil = cicil + "Total: " + listCicilan[pinjam]["result"];
+						cicil = cicil + "</li>";
+		    		}
+		    	}
+		    	else if(cek == ">12"){
+		    		if (buulan > 12){
+		    			cicil = cicil + "<li>";
+				    	cicil = cicil + "Pinjaman awal: " + listCicilan[pinjam]["duit"] + "<br>";
+				    	cicil = cicil + "Lama: " + listCicilan[pinjam]["bulan"] + "<br>";
+				    	cicil = cicil + "Bunga: " + listCicilan[pinjam]["bunga"] + "<br>";
+				    	cicil = cicil + "Total: " + listCicilan[pinjam]["result"];
+						cicil = cicil + "</li>";
+		    		}
+		    	}
+			}
+
+		
+
+		cicil = cicil + "</ol";
+		$("#detail-cicilan").html(cicil);
+	}
 		
 
 </script>
@@ -67,7 +114,7 @@
 		    <div data-role="navbar">
 		      	<ul>
 			        <li><a href="#page_pinjam">Input Pinjaman</a></li>
-			        <li><a href="#page_cicilan">List Cicilan</a></li>
+			        <li><a href="#page_cicilan" onclick="cek();">List Cicilan</a></li>
 		      	</ul>
 		    </div>
   		</div>
@@ -101,7 +148,7 @@
 	  	<div data-role="main" class="ui-content">
 	    	<label>Filter Bulan</label>
 	    	<label>
-	    	<input type="radio" name="bln" value="0" checked="checked">All</label>
+	    	<input type="radio" name="bln" value="0">All</label>
 	    	<label><input type="radio" name="bln" value="0-6">0-6</label>
 	    	<label><input type="radio" name="bln" value="7-12">7-12</label>
 	    	<label><input type="radio" name="bln" value=">12">>12</label>
